@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Applications</title>
+</head>
+<body bgcolor="lightblue" >
+    <center>
+        <h1 style="font-size:50px">This is ToDo App page</h1>
+        <h1>ADD ITEMS</h1><br>
+
+        <form action="{% url 'addTodo' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="content" style="width:300px; height:30px;"/>
+            <input type="submit" style="background-color:blue; width:100px; height:30px; color:white;" />
+        </form>
+
+        <ul>
+            {% for item in all_items %}
+            <li style="display: inline;">
+                <h1>{{item.content}}<h1>
+                <form action="{% url 'deleteTodo' item.id %}" method="POST">
+                     {% csrf_token %}
+                     <input type="submit" value="Delete" style="background-color:red" />
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </center>
+</body>
+</html>
